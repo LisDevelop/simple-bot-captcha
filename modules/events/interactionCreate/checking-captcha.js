@@ -2,7 +2,7 @@ const low = require('lowdb')
 const path = require('path');
 const FileSync = require('lowdb/adapters/FileSync');
 const Canvas = require('canvas');
-const { EmbedBuilder } = require('@discordjs/builders');
+const { AttachmentBuilder } = require('discord.js');
 
 const check_BOT = new FileSync(path.resolve(__dirname, '../../configurations/configsBOT.json'));
 const config_BOT = low(check_BOT)
@@ -31,7 +31,7 @@ const generateImage = async (interaction, client) => {
     Canvas.registerFont(path.resolve(__dirname, '../../configurations/assets/Highman.ttf'), { family: 'Highman Trial' })
 
     const code = generateCharacters(5);
-    const canvas = Canvas.createCanvas(11, 3);
+    const canvas = Canvas.createCanvas(322, 96);
     const context = canvas.getContext('2d');
   
     const background = await loadImage();
@@ -46,26 +46,27 @@ const generateImage = async (interaction, client) => {
     context.fillStyle = corTexto1;
 
     // Posiciona o texto no canvas
-    const textoX = 410.8;
-    const textoY = 2037.5;
+    const textoX = 3.75;
+    const textoY = 1.78;
     context.fillText(texto1, textoX, textoY);
 
     const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), 'profile-image.jpg');
 
     // sys
-    const changeUser = client.guild.cache.get(changeInfo.bot_idGuilda).members.cache.find(u => u.id === `${interaction.user.id}`);
+    const changeUser = client.users.cache.get(interaction.user.id);
     changeUser.send({content: "> **BEM-VINDO(A)!!!**\n- Para verificar o nosso captcha é bem simples e prático, para isso, você deve apenas digitalizar os caracteres que estão na imagem. Para fazer isso, clique no botão logo abaixo e coloque o código que está.", files: [attachment]}).then(msg => {
         config_USERS.get('users').push({
             userid: `${interaction.user.id}`,
             username: `${interaction.user.username}`,
             code: `${code}`
         }).write()
+        interaction.reply({content: 'Acabei de enviar no seu privado o código do captcha.', ephemeral: true})
     }).catch(err => {
         interaction.reply({content: `**[AVISO]:** Tive um erro ao enviar uma mensagem no seu privado. Libere antes de solicitar o captcha! Caso ainda tenha problemas, envie uma mensagem para: markusfiller`, ephemeral: true})
     })
 };
 
-module.exports = (interaction) => {
+module.exports = (interaction, client) => {
     if(interaction.customId === 'checking_Captcha'){
         config_BOT.read(); config_BOT.write()
         config_USERS.read(); config_USERS.write()

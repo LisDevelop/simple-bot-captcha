@@ -60,6 +60,7 @@ const generateImage = async (interaction, client) => {
     )
 
     // sys
+    config_USERS.read(); config_USERS.write()
     const verifyUser = config_USERS.get('users').find({userid: `${interaction.user.id}`}).value()
     if(verifyUser === undefined){
         interaction.reply({content: '> **BEM-VINDO(A)!!!**\n- Para verificar o nosso captcha é bem simples e prático, para isso, você deve apenas digitalizar os caracteres que estão na imagem. Para fazer isso, clique no botão logo abaixo e coloque o código que está.', files: [attachment], components: [buttonCaptcha], ephemeral: true}).then(msg => {
@@ -93,7 +94,7 @@ module.exports = (interaction, client) => {
         const getName = new TextInputBuilder()
         .setCustomId('getCode')
         .setLabel('Qual o código?')
-        .setPlaceholder('Coloque os seis digitos aqui!!!')
+        .setPlaceholder('Coloque os cinco digitos aqui!!!')
         .setMaxLength(5)
         .setMinLength(5)
         .setStyle(TextInputStyle.Short);
@@ -114,7 +115,12 @@ module.exports = (interaction, client) => {
                 const checkrole = config_BOT.get('CONFIG_DO_BOT').find({bot_configurations: 'NO_MODIFY'}).value()
                 const role = interaction.guild.roles.cache.get(checkrole.bot_ruleNotVerify);
 
-                interaction.member.roles.remove(role)
+                interaction.reply({content: '**[AVISO]:** Parabéns, você passou no captcha! Seja bem-vindo(a) ao Praia Grande. Aguarde cinco segundos para continuar.', ephemeral: true})
+
+                setTimeout(() => {
+                    interaction.member.roles.remove(role)
+                    config_USERS.get('users').remove({userid: `${interaction.user.id}`}).write()
+                }, 5000);
             
             }else{
                 interaction.update({content: "**[AVISO]:** Você colocou o código errado. Clique novamente em verificar captcha para prosseguir com outro código.", files: [], components: []})

@@ -13,7 +13,7 @@ module.exports = (client) => {
 
     try{
         client.guilds.cache.get(check.bot_idGuilda).roles.cache.some(r => r.id === check.bot_ruleNotVerify)
-        console.log('[AVISO]; Cargo verificado com sucesso!')
+        console.log('[AVISO]: Cargo verificado com sucesso!')
     } catch(err){
         console.log('[ERRO DEPENDÊNCIA]: Você não configurou corretamente o ID da guilda ou o ID do cargo que será setado como Não verificado! Vá nas configurações e modifique.')
         process.exit()

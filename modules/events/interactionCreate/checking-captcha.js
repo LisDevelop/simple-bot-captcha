@@ -2,8 +2,7 @@ const low = require('lowdb')
 const path = require('path');
 const FileSync = require('lowdb/adapters/FileSync');
 const Canvas = require('canvas');
-const { AttachmentBuilder } = require('discord.js');
-
+const { AttachmentBuilder, ButtonStyle, ActionRowBuilder, ButtonBuilder, ModalBuilder, TextInputBuilder, TextInputStyle} = require('discord.js');
 const check_BOT = new FileSync(path.resolve(__dirname, '../../configurations/configsBOT.json'));
 const config_BOT = low(check_BOT)
 
@@ -46,24 +45,37 @@ const generateImage = async (interaction, client) => {
     context.fillStyle = corTexto1;
 
     // Posiciona o texto no canvas
-    const textoX = 3.75;
-    const textoY = 1.78;
+    const textoX = 75;
+    const textoY = 75;
     context.fillText(texto1, textoX, textoY);
 
     const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), 'profile-image.jpg');
 
+    const buttonCaptcha = new ActionRowBuilder()
+    .addComponents(
+        new ButtonBuilder()
+        .setCustomId('verify_captcha')
+        .setLabel('Verificar código')
+        .setStyle(ButtonStyle.Primary)
+    )
+
     // sys
-    const changeUser = client.users.cache.get(interaction.user.id);
-    changeUser.send({content: "> **BEM-VINDO(A)!!!**\n- Para verificar o nosso captcha é bem simples e prático, para isso, você deve apenas digitalizar os caracteres que estão na imagem. Para fazer isso, clique no botão logo abaixo e coloque o código que está.", files: [attachment]}).then(msg => {
-        config_USERS.get('users').push({
-            userid: `${interaction.user.id}`,
-            username: `${interaction.user.username}`,
-            code: `${code}`
-        }).write()
-        interaction.reply({content: 'Acabei de enviar no seu privado o código do captcha.', ephemeral: true})
-    }).catch(err => {
-        interaction.reply({content: `**[AVISO]:** Tive um erro ao enviar uma mensagem no seu privado. Libere antes de solicitar o captcha! Caso ainda tenha problemas, envie uma mensagem para: markusfiller`, ephemeral: true})
-    })
+    const verifyUser = config_USERS.get('users').find({userid: `${interaction.user.id}`}).value()
+    if(verifyUser === undefined){
+        interaction.reply({content: '> **BEM-VINDO(A)!!!**\n- Para verificar o nosso captcha é bem simples e prático, para isso, você deve apenas digitalizar os caracteres que estão na imagem. Para fazer isso, clique no botão logo abaixo e coloque o código que está.', files: [attachment], components: [buttonCaptcha], ephemeral: true}).then(msg => {
+            config_USERS.get('users').push({
+                userid: `${interaction.user.id}`,
+                username: `${interaction.user.username}`,
+                code: `${code}`
+            }).write()        
+        })
+    }else{
+        interaction.reply({content: '> **BEM-VINDO(A)!!!**\n- Para verificar o nosso captcha é bem simples e prático, para isso, você deve apenas digitalizar os caracteres que estão na imagem. Para fazer isso, clique no botão logo abaixo e coloque o código que está.', files: [attachment], components: [buttonCaptcha], ephemeral: true}).then(msg => {
+            config_USERS.get('users').find({userid: `${interaction.user.id}`}).assign({
+                code: `${code}`
+            }).write()   
+        })
+    }
 };
 
 module.exports = (interaction, client) => {
@@ -71,12 +83,42 @@ module.exports = (interaction, client) => {
         config_BOT.read(); config_BOT.write()
         config_USERS.read(); config_USERS.write()
 
-        // verificações
-        const checkUsers = config_USERS.get('users').find({userid: `${interaction.user.id}`}).value()
-        if(checkUsers === undefined){
-            generateImage(interaction, client);
+        generateImage(interaction, client);
+    }
+    if(interaction.customId === 'verify_captcha'){
+        const modeloIntro = new ModalBuilder()
+        .setCustomId(`change_panelCaptcha`)
+        .setTitle('Checando código')
+        //
+        const getName = new TextInputBuilder()
+        .setCustomId('getCode')
+        .setLabel('Qual o código?')
+        .setPlaceholder('Coloque os seis digitos aqui!!!')
+        .setMaxLength(5)
+        .setMinLength(5)
+        .setStyle(TextInputStyle.Short);
+
+        const sa1 = new ActionRowBuilder().addComponents(getName);
+        modeloIntro.addComponents(sa1)
+        interaction.showModal(modeloIntro)
+    }
+    if(interaction.customId === 'change_panelCaptcha'){
+        config_USERS.read(); config_USERS.write()
+        const get1 = interaction.fields.getTextInputValue('getCode');
+
+        const checkUser = config_USERS.get('users').find({userid: `${interaction.user.id}`}).value()
+        if(checkUser === undefined){
+            interaction.reply({content: "**[AVISO]:** Você não está inserido no meu banco de dados temporário. Para isso, vá e crie outro captcha. Entre no servidor principal e clique em verificar captcha!"})
         }else{
-            interaction.reply({content: "**[AVISO]** | Voc~e já possui um captcha aberto no nosso privado! Vá lá e de uma olhada.", ephemeral: true})
+            if(get1 === checkUser.code){
+                const checkrole = config_BOT.get('CONFIG_DO_BOT').find({bot_configurations: 'NO_MODIFY'}).value()
+                const role = interaction.guild.roles.cache.get(checkrole.bot_ruleNotVerify);
+
+                interaction.member.roles.remove(role)
+            
+            }else{
+                interaction.update({content: "**[AVISO]:** Você colocou o código errado. Clique novamente em verificar captcha para prosseguir com outro código.", files: [], components: []})
+            }
         }
     }
 }

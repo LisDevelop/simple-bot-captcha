@@ -2,10 +2,11 @@
   "CONFIG_DO_BOT": [
     {
       "bot_configurations": "NO_MODIFY",
-      "bot_token": "MTE4MTcyNzE5MzM5MTQ0ODEyNA.G10hC0.0D0XejxANQqhdTHmJHuf4dBSnE-nDt_aHSM1Nc",
-      "bot_ruleNotVerify": "1181738516607148082",
-      "bot_channelToCaptcha": "1181736031389761538",
-      "bot_idGuilda": "1180647462222962738",
+      "bot_token": "MTE4MjQ4NzY3MzU4NDIyNjM3NA.GGMx54.IbfJUmlfvqkzr0bGNBjwnyppI6_u0F-TuiQphk",
+      "bot_ruleNotVerify": "1182481645610205214",
+      "bot_channelToCaptcha": "1182482064528908388",
+      "bot_ruleNoPassaport": "1103366168888217671",
+      "bot_idGuilda": "1102450121372880966",
       "bot_checkingMessage": "1 | NÃO MEXA AQUI!"
     }
   ]

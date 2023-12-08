@@ -13,10 +13,15 @@ module.exports = (client) => {
     // verificações
     const checking = config_BOT.get('CONFIG_DO_BOT').find({bot_configurations: 'NO_MODIFY'}).value()
 
-    let embed = new EmbedBuilder()
-    .setTitle('Praia Grande Roleplay — Verificação')
-    .setDescription('Seja bem-vindo(a) ao grupo Praia Grande Roleplay, mas antes, para ter acesso aos canais de whitelist, dúvidas e spoilers, você precisará resolver um simples captcha.\n\n- Para resolver basta clicar no botão abaixo que você receberá uma mensagem no seu privado com o captcha!')
-
+    let embed2 = new EmbedBuilder()
+    .setTitle('Praia Grande — Verificação')
+    .setThumbnail('https://media.discordapp.net/attachments/1077814640513384448/1182491145763295333/praia_grande_rp.png')
+    .setFooter({text: 'Sistema de verificação — '})
+    .setTimestamp()
+    .addFields(
+        {name: `Como funciona?`, value: `- Olá caro interpretador, seja bem-vindo(a) ao servidor **Praia Grande Roleplay**!! Aqui você verá novas possibilidades, mas antes disso, você deve resolver um captcha. Usamos esse sistema bem prático para que novos spammers que entrem não tenham acesso a nossas áreas públicas. Clique no botão abaixo e prossiga com o captcha para darmos continuidade a sua entrada no servidor.`}
+    )
+    
     const buttonCaptcha = new ActionRowBuilder()
     .addComponents(
         new ButtonBuilder()

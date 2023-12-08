@@ -41,6 +41,7 @@ if(!config_token){
         bot_configurations: 'NO_MODIFY',
         bot_token: 'TOKEN_AQUI',
         bot_ruleNotVerify: 'ID DO CARGO DE NÃO VERIFICADO AQUI',
+        bot_ruleNoPassaport: 'ID DO CARGO DE SEM PASSAPORTE',
         bot_channelToCaptcha: 'ID DO CANAL PARA ENVIAR O CAPTCHA',
         bot_idGuilda: "ID_DA_GUILDA_AQUI",
         bot_checkingMessage: '0 | NÃO MEXA AQUI!'

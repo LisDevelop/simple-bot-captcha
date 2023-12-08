@@ -114,11 +114,13 @@ module.exports = (interaction, client) => {
             if(get1 === checkUser.code){
                 const checkrole = config_BOT.get('CONFIG_DO_BOT').find({bot_configurations: 'NO_MODIFY'}).value()
                 const role = interaction.guild.roles.cache.get(checkrole.bot_ruleNotVerify);
+                const noPassaport = interaction.guild.roles.cache.get(checkrole.bot_ruleNoPassaport);
 
                 interaction.reply({content: '**[AVISO]:** Parabéns, você passou no captcha! Seja bem-vindo(a) ao Praia Grande. Aguarde cinco segundos para continuar.', ephemeral: true})
 
                 setTimeout(() => {
                     interaction.member.roles.remove(role)
+                    interaction.member.roles.add(noPassaport)
                     config_USERS.get('users').remove({userid: `${interaction.user.id}`}).write()
                 }, 5000);
             

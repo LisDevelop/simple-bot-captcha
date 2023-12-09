@@ -6,15 +6,16 @@
       "bot_ruleNotVerify": "1182481645610205214",
       "bot_channelToCaptcha": "1182482064528908388",
       "bot_ruleNoPassaport": "1103366168888217671",
-      "bot_idGuilda": "1102450121372880966",
+      "bot_idGuilda": "1180647462222962738",
       "bot_checkingMessage": "1 | NÃO MEXA AQUI!"
     },
     {
       "staff_configurations": "NO_MODIFY",
-      "staff_channelToIntroduction": "",
-      "staff_channelToPanel": "",
-      "staff_checkingIntroductionMessage": "0 | NÃO MEXA AQUI!",
-      "staff_checkingPanelMessage": "0 | NÃO MEXA AQUI!"
+      "staff_idGuildaStaff": "1182825301386989738",
+      "staff_channelToIntroduction": "1182831223287058452",
+      "staff_channelToPanel": "1182835325953908816",
+      "staff_checkingIntroductionMessage": "1 | NÃO MEXA AQUI!",
+      "staff_checkingPanelMessage": "1 | NÃO MEXA AQUI!"
     }
   ]
 }

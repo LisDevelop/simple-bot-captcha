@@ -47,21 +47,16 @@ module.exports = (client) => {
     )
 
     try{
-        if(checking.staff_checkingIntroductionMessage === '0 | NÃO MEXA AQUI!'){
-            client.channels.cache.get(checking.staff_channelToIntroduction).send({embeds: [embed], components: [buttonStaffer]})
-            config_BOT.get('CONFIG_DO_BOT').find({staff_configurations: 'NO_MODIFY'}).assign({staff_checkingIntroductionMessage: '1 | NÃO MEXA AQUI!'}).write()
-        }else{
-            return;
-        }
-    } catch(err) {
-        console.log('[ERRO DEPENDÊNCIA]: Você não colocou corretamente o ID de um canal nas configurações. Vá no diretório; modules/configsBOT.json e adicione o ID do canal onde pede o staff_channelToIntroduction')
-        process.exit()
-    }
-
-    try{
         if(checking.staff_checkingPanelMessage === '0 | NÃO MEXA AQUI!'){
             client.channels.cache.get(checking.staff_channelToPanel).send({embeds: [embed2], components: [buttonPanel]})
             config_BOT.get('CONFIG_DO_BOT').find({staff_configurations: 'NO_MODIFY'}).assign({staff_checkingPanelMessage: '1 | NÃO MEXA AQUI!'}).write()
+        }else{
+            return;
+        }
+
+        if(checking.staff_checkingIntroductionMessage === '0 | NÃO MEXA AQUI!'){
+            client.channels.cache.get(checking.staff_channelToIntroduction).send({embeds: [embed], components: [buttonStaffer]})
+            config_BOT.get('CONFIG_DO_BOT').find({staff_configurations: 'NO_MODIFY'}).assign({staff_checkingIntroductionMessage: '1 | NÃO MEXA AQUI!'}).write()
         }else{
             return;
         }

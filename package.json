@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.11.2",
+    "cfx-api": "^1.1.0",
     "discord.js": "^14.14.1",
     "djs-commander": "^0.0.50",
     "lowdb": "^1.0.0"

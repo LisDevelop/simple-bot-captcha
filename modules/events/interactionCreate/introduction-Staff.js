@@ -21,13 +21,11 @@ module.exports = (interaction, client) => {
     }
     if(interaction.customId === 'change_panelStaff'){
         const get1 = interaction.fields.getTextInputValue('getNamePerson');
-        const roled = interaction.guild.roles.cache.get(`1182826351682670733`);
-        const cargo = client.guilds.cache.get('1182825301386989738').roles.cache.get('1182826351682670733');
         interaction.reply({content: "**[AVISO]:** Parabéns, você foi adicionado ao cargo mínimo, agora, boa sorte. Em cinco segundos perderá acesso a esse canal.", ephemeral: true})
 
         setTimeout(() => {
             interaction.member.setNickname(`${get1}`)
-          //  interaction.member.rules.add(`${cargo}`) // id cargo suporte
+            interaction.member.roles.add('1182826351682670733') // id cargo suporte
 
             let embed = new EmbedBuilder()
             .setTitle('Novo administrador')

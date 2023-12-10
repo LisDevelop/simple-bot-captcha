@@ -41,7 +41,7 @@ module.exports = (client) => {
     const buttonPanel = new ActionRowBuilder()
     .addComponents(
         new ButtonBuilder()
-        .setCustomId('checking_Staffer')
+        .setCustomId('checking_Panel')
         .setLabel('Comandos disponíveis')
         .setStyle(ButtonStyle.Success)
     )

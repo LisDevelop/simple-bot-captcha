@@ -1,6 +1,13 @@
 const { ModalBuilder, TextInputStyle, EmbedBuilder } = require('discord.js');
 const { TextInputBuilder, ActionRowBuilder } = require('@discordjs/builders');
 
+const low = require('lowdb')
+const path = require('path');
+const FileSync = require('lowdb/adapters/FileSync');
+
+const check_BOT = new FileSync(path.resolve(__dirname, '../../configurations/administrators.json'));
+const config_BOT = low(check_BOT)
+
 module.exports = (interaction, client) => {
     if(interaction.customId === 'checking_Staffer'){
         const modeloIntro = new ModalBuilder()
@@ -23,17 +30,42 @@ module.exports = (interaction, client) => {
         .setMaxLength(50)
         .setStyle(TextInputStyle.Short);
 
+        //
+        const getAcID = new TextInputBuilder()
+        .setCustomId('getAcID')
+        .setLabel('Qual ID registrado do anticheat?')
+        .setPlaceholder('Ex: 1021')
+        .setMaxLength(50)
+        .setStyle(TextInputStyle.Short);
+
+        
+
         const sa1 = new ActionRowBuilder().addComponents(getName);
-        modeloIntro.addComponents(sa1)
+        const sa2 = new ActionRowBuilder().addComponents(getAccID);
+        const sa3 = new ActionRowBuilder().addComponents(getAcID);
+        modeloIntro.addComponents(sa1, sa2, sa3)
         interaction.showModal(modeloIntro)
     }
     if(interaction.customId === 'change_panelStaff'){
         const get1 = interaction.fields.getTextInputValue('getNamePerson');
+        const get2 = interaction.fields.getTextInputValue('getAccID');
+        const get3 = interaction.fields.getTextInputValue('getAcID');
+
         interaction.reply({content: "**[AVISO]:** Parabéns, você foi adicionado ao cargo mínimo, agora, boa sorte. Em cinco segundos perderá acesso a esse canal.", ephemeral: true})
 
         setTimeout(() => {
             interaction.member.setNickname(`${get1}`)
             interaction.member.roles.add('1182826351682670733') // id cargo suporte
+
+            config_BOT.read(); config_BOT.write()
+            config_BOT.get('admins').push({
+                userID: interaction.user.id,
+                username: interaction.user.username,
+                userRule: `Suporte`,
+                personName: `${get1}`,
+                accountsID: `${get2}`,
+                anticheatID: `${get3}`
+            }).write()
 
             let embed = new EmbedBuilder()
             .setTitle('Novo administrador')

@@ -1,3 +1,36 @@
 {
-    "admins": []
+  "admins": [
+    {
+      "userID": "12212121314312",
+      "username": "LisGaming",
+      "userRule": "Suporte",
+      "personName": "oda",
+      "accountsID": "1223",
+      "anticheatID": "321"
+    },
+    {
+      "userID": "12212121314312",
+      "username": "tesd",
+      "userRule": "Suporte",
+      "personName": "oda",
+      "accountsID": "1223",
+      "anticheatID": "321"
+    },
+    {
+      "userID": "12212121314312",
+      "username": "sdkdfsk",
+      "userRule": "Suporte",
+      "personName": "oda",
+      "accountsID": "1223",
+      "anticheatID": "321"
+    },
+    {
+      "userID": "12212121314312",
+      "username": "sdkdfsk",
+      "userRule": "Diretor Geral",
+      "personName": "oda",
+      "accountsID": "1223",
+      "anticheatID": "321"
+    }
+  ]
 }

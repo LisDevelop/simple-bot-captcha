@@ -9,10 +9,18 @@ module.exports = (interaction, client) => {
         //
         const getName = new TextInputBuilder()
         .setCustomId('getNamePerson')
-        .setLabel('Qual nome do seu personagem?')
-        .setPlaceholder('Digite o nome do seu personagem.')
+        .setLabel('Qual seu nome de usuário no grupo principal?')
+        .setPlaceholder('Ex: éoGordão')
         .setMaxLength(50)
         .setMinLength(5)
+        .setStyle(TextInputStyle.Short);
+
+        //
+        const getAccID = new TextInputBuilder()
+        .setCustomId('getAccID')
+        .setLabel('Qual ID da sua(s) conta(s)?')
+        .setPlaceholder('Ex: 1023 ou: 1023, 2323, 45')
+        .setMaxLength(50)
         .setStyle(TextInputStyle.Short);
 
         const sa1 = new ActionRowBuilder().addComponents(getName);

@@ -9,6 +9,11 @@ module.exports = (client) => {
     config_BOT.read(); config_BOT.write()
 
     const data = config_BOT.value();
-
     data.admins.map(r => console.log(`${r.username}`))
+
+    const getAll = config_BOT.get('admins').filter(s => s.userRule === 'Suporte').value()
+
+    const adminName = getAll.map(user => user.username)
+    
+    console.log(adminName)
 }

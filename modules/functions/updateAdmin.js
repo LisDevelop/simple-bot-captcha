@@ -11,11 +11,11 @@ function updateAdmin(selectUser){
 
     const globalChange = config_BOT.value()
 
-    
-
     let embed = new EmbedBuilder()
     .setTitle('Quadro dos administradores')
     .setThumbnail('https://media.discordapp.net/attachments/1077814640513384448/1182491145763295333/praia_grande_rp.png')
     .setTimestamp()
     .setFooter({text: 'Atualizado em: '})
+
+    
 }

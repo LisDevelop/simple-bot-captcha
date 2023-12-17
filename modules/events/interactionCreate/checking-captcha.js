@@ -116,13 +116,13 @@ module.exports = (interaction, client) => {
                 const role = interaction.guild.roles.cache.get(checkrole.bot_ruleNotVerify);
                 const noPassaport = interaction.guild.roles.cache.get(checkrole.bot_ruleNoPassaport);
 
-                interaction.reply({content: '**[AVISO]:** Parabéns, você passou no captcha! Seja bem-vindo(a) ao Praia Grande. Aguarde cinco segundos para continuar.', ephemeral: true})
+                interaction.update({content: '**[AVISO]:** Parabéns, você passou no captcha! Seja bem-vindo(a) ao Praia Grande.', ephemeral: true})
 
                 setTimeout(() => {
                     interaction.member.roles.remove(role)
                     interaction.member.roles.add(noPassaport)
                     config_USERS.get('users').remove({userid: `${interaction.user.id}`}).write()
-                }, 5000);
+                }, 2000);
             
             }else{
                 interaction.update({content: "**[AVISO]:** Você colocou o código errado. Clique novamente em verificar captcha para prosseguir com outro código.", files: [], components: []})

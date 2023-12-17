@@ -11,11 +11,11 @@ module.exports = (client) => {
     // verificar
     const check = config_BOT.get('CONFIG_DO_BOT').find({bot_configurations: 'NO_MODIFY'}).value()
 
-   /* try{
+    try{
         client.guilds.cache.get(check.bot_idGuilda).roles.cache.some(r => r.id === check.bot_ruleNotVerify)
         console.log('[AVISO]: Cargo verificado com sucesso!')
     } catch(err){
         console.log('[ERRO DEPENDÊNCIA]: Você não configurou corretamente o ID da guilda do servidor principal ou o ID do cargo que será setado como Não verificado! Vá nas configurações e modifique.')
         process.exit()
-    }*/
+    }
 }

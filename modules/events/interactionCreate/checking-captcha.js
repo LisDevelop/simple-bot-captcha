@@ -106,12 +106,13 @@ module.exports = (interaction, client) => {
     if(interaction.customId === 'change_panelCaptcha'){
         config_USERS.read(); config_USERS.write()
         const get1 = interaction.fields.getTextInputValue('getCode');
+        const low = get1.toLowerCase();
 
         const checkUser = config_USERS.get('users').find({userid: `${interaction.user.id}`}).value()
         if(checkUser === undefined){
             interaction.reply({content: "**[AVISO]:** Você não está inserido no meu banco de dados temporário. Para isso, vá e crie outro captcha. Entre no servidor principal e clique em verificar captcha!"})
         }else{
-            if(get1 === checkUser.code){
+            if(low === checkUser.code){
                 const checkrole = config_BOT.get('CONFIG_DO_BOT').find({bot_configurations: 'NO_MODIFY'}).value()
                 const role = interaction.guild.roles.cache.get(checkrole.bot_ruleNotVerify);
                 const noPassaport = interaction.guild.roles.cache.get(checkrole.bot_ruleNoPassaport);

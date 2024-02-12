@@ -2,20 +2,12 @@
   "CONFIG_DO_BOT": [
     {
       "bot_configurations": "NO_MODIFY",
-      "bot_token": "MTE4MjQ4NzY3MzU4NDIyNjM3NA.GGMx54.IbfJUmlfvqkzr0bGNBjwnyppI6_u0F-TuiQphk",
-      "bot_ruleNotVerify": "1182481645610205214",
-      "bot_channelToCaptcha": "1182482064528908388",
-      "bot_ruleNoPassaport": "1103366168888217671",
-      "bot_idGuilda": "1102450121372880966",
-      "bot_checkingMessage": "1 | NÃO MEXA AQUI!"
-    },
-    {
-      "staff_configurations": "NO_MODIFY",
-      "staff_idGuildaStaff": "1182825301386989738",
-      "staff_channelToIntroduction": "1182831223287058452",
-      "staff_channelToPanel": "1182835325953908816",
-      "staff_checkingIntroductionMessage": "1 | NÃO MEXA AQUI!",
-      "staff_checkingPanelMessage": "1 | NÃO MEXA AQUI!"
+      "bot_token": "TOKEN DO BOT AQUI",
+      "bot_ruleNotVerify": "ID DO CARGO DE NÃO VERIFICADO AQUI",
+      "bot_channelToCaptcha": "ID DO CANAL PARA MENSAGEM DE CAPTCHA AQUI",
+      "bot_ruleNoPassaport": "ID DO CARGO DE SEM PASSAPORTE AQUI",
+      "bot_idGuilda": "ID DA GUILDA AQUI",
+      "bot_checkingMessage": "0 | NÃO MEXA AQUI!"
     }
   ]
 }

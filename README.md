@@ -1,1 +1,1 @@
-# praia-grande-captcha
+# simple-bot-captcha
